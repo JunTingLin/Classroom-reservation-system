@@ -5,21 +5,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class UserDAOTest {
     @Autowired
     private UserDAO userDAO;
 
     @Test
-    void findAll(){
+    void getUsers(){
         System.out.println("輸出"+userDAO.findAll());
         System.out.println("型別"+(userDAO.findAll()).getClass().getSimpleName());
     }
 
     @Test
-    void save(){
+    void createUser(){
         User user = new User();
         user.setName("測試名");
         user.setNumber(108745874);

@@ -11,13 +11,12 @@ import javax.persistence.Id;
 @Entity
 @Data
 @ToString
-public class User {
+public class Classroom {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private  String name;
-    private Integer number;
-    private String email;
-    private boolean isAdmin;
+    private String number;
+
 
 }
