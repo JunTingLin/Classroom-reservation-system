@@ -33,7 +33,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
     @PutMapping("/users/{id}")
-    public ResponseEntity upadteTodo(@PathVariable Integer id, @RequestBody User user) {
+    public ResponseEntity upadteUser(@PathVariable Integer id, @RequestBody User user) {
         Boolean result = userService.updateUser(id ,user);
         if (!result) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id 不存在");
@@ -41,7 +41,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body("成功更新");
     }
     @DeleteMapping("/users/{id}")
-    public ResponseEntity deleteTodo(@PathVariable Integer id) {
+    public ResponseEntity deleteUser(@PathVariable Integer id) {
         Boolean result = userService.deleteUser(id);
         if (!result) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id 不存在");
