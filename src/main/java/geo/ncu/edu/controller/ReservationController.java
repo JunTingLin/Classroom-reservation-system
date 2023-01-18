@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -29,17 +30,25 @@ public class ReservationController {
 
     @PostMapping("/reservations")
     public ResponseEntity createReservation(@RequestBody Reservation reservation) {
-        Integer result = reservationService.createReservation(reservation);
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+        try {
+            Integer result = reservationService.createReservation(reservation);
+            return ResponseEntity.status(HttpStatus.CREATED).body(result);
+        }catch (Exception ex){
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, ex.getMessage());
+        }
     }
     @PutMapping("/reservations/{id}")
     public ResponseEntity upadteReservation(@PathVariable Integer id, @RequestBody Reservation reservation) {
-        if(!reservation.getStartTime().before(reservation.getEndTime())){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("結束時間不可早於開始時間");
-        }
-        Boolean result = reservationService.updateReservation(id ,reservation);
-        if (!result) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id 不存在");
+        try {
+            Boolean result = reservationService.updateReservation(id ,reservation);
+            if (!result) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST, "id 不存在");
+            }
+        }catch (Exception ex){
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, ex.getMessage());
         }
         return ResponseEntity.status(HttpStatus.OK).body("成功更新");
     }
@@ -47,7 +56,8 @@ public class ReservationController {
     public ResponseEntity deleteReservation(@PathVariable Integer id) {
         Boolean result = reservationService.deleteReservation(id);
         if (!result) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id 不存在");
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "id 不存在");
         }
         return ResponseEntity.status(HttpStatus.OK).body("成功刪除");
     }
