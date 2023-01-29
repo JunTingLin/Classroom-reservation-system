@@ -13,7 +13,7 @@ public class DefaultController {
         return "home";
     }
 
-    @RequestMapping("/user")
+    @RequestMapping("/form")
     public String user() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -25,11 +25,11 @@ public class DefaultController {
             });
         }
 
-        return "user";
+        return "form";
     }
 
-    @RequestMapping("/about")
+    @RequestMapping("/calendar")
     public String about() {
-        return "about";
+        return "calendar";
     }
 }
