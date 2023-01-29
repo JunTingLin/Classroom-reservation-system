@@ -4,6 +4,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -14,7 +15,7 @@ public class DefaultController {
     }
 
     @RequestMapping("/form")
-    public String user() {
+    public String user(ModelMap modelMap) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication instanceof OAuth2AuthenticationToken) {
@@ -23,6 +24,8 @@ public class DefaultController {
             token.getPrincipal().getAttributes().forEach((k, v) -> {
                 System.out.printf("%s : %s\n", k, v);
             });
+            modelMap.addAttribute("p",token.getPrincipal().getAttributes());
+
         }
 
         return "form";

@@ -1,5 +1,6 @@
 ；<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <div th:replace="fragments/header :: header-css"/>
 </head>
@@ -10,28 +11,72 @@
 <div class="container">
 
     <div class="starter-template">
-        <h1>User page (Spring Security protected)</h1>
+<!--        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
+        <h1>預約 (ncu portal)</h1>
+        <h2>您目前已預約</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">classroom</th>
+                <th scope="col">date</th>
+                <th scope="col">start</th>
+                <th scope="col">end</th>
+                <th scope="col">operate</th>
+            </tr>
+            </thead>
+            <tbody>
 
-        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-        <form>
+            <tr>
+                <th scope="row">S130</th>
+                <td>2020.02.13</td>
+                <td>13:00</td>
+                <td>14:00</td>
+                <td><button type="button" class="btn btn-danger">Delete</button></td>
+            </tr>
+
+            </tbody>
+        </table>
+
+        <h2>新增預約</h2>
+
+        <form th:object="${#httpServletRequest.remoteUser}">
+            
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <label for="inputStudentId">StudentId</label>
+                <input type="text" class="form-control" id="inputStudentId"  th:value="${p.get('identifier')}" disabled>
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="inputChineseName">ChineseName</label>
+                <input type="text" class="form-control" id="inputChineseName"  th:value="${p.get('chineseName')}" disabled>
             </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            <div class="form-group">
+                <label for="inputEmail">Email address</label>
+                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" th:value="${p.get('email')}" disabled>
+                <small id="emailHelp" class="form-text text-muted">此emal是您protal上登記的email，預約時間前半小時會寄email提醒您</small>
+            </div>
+
+            <select class="form-select" aria-label="Default select example" required>
+                <label>choose classroom</label>
+                <option value="S130">S130</option>
+                <option value="S231">S231</option>
+                <option value="S253">S253</option>
+            </select>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="start">Choose a time for your meeting start:</label>
+                <input type="time" id="start" name="start"  min="09:00" max="18:00" step="3600" required>
+            </div>
+            <div class="form-group">
+                <label for="end">Choose a time for your meeting end:</label>
+                <input type="time" id="end" name="end"  min="09:00" max="18:00" step="3600" required>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
+
+
 
     </div>
 
