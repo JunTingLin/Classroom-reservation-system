@@ -2,6 +2,7 @@ package ncu.cc.oauthclient.bean;
 
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer studentId;
+    private String studentId;
     private  String chineseName;
     private String email;
     private String classroom;
