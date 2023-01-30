@@ -14,6 +14,12 @@
 <!--        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
         <h1>預約 (ncu portal)</h1>
         <h2>您目前已預約</h2>
+        <small>
+            <ol>
+                <li>此部分僅顯示今天(含)以後的預約，過往紀錄不顯示</li>
+                <li>日期(date)從最近的開始排序</li>
+            </ol>
+        </small>
         <table class="table">
             <thead>
             <tr>
@@ -27,18 +33,26 @@
             <tbody>
 
             <tr th:each="yourReservation: ${yourReservations}">
-                <th scope="row" th:text="${yourReservation.classroom}" />
-                <td th:text="${yourReservation.date}" />
-                <td th:text="${yourReservation.start}" />
-                <td th:text="${yourReservation.end}" />
-                <td><button type="button" class="btn btn-danger">Delete</button></td>
+                <form th:action="@{/deleteReservation}"  method="post" enctype="multipart/form-data">
+                    <input name="id" th:value="${yourReservation.id}" hidden>
+                    <th scope="row" th:text="${yourReservation.classroom}" />
+                    <td th:text="${yourReservation.date}" />
+                    <td th:text="${yourReservation.start}" />
+                    <td th:text="${yourReservation.end}" />
+                    <td><button type="submit" class="btn btn-danger" id="deleteButton">Delete</button></td>
+                </form>
             </tr>
 
             </tbody>
         </table>
 
         <h2>新增預約</h2>
-
+        <div class="alert alert-danger" role="alert" th:if="${msg!=null && !msg.equals('新增成功')}">
+            [[${msg}]]
+        </div>
+        <div class="alert alert-success" role="alert" th:if="${msg!=null && msg.equals('新增成功')}">
+            [[${msg}]]
+        </div>
         <form th:action="@{/addReservation}"  method="post" enctype="multipart/form-data">
 
             <div class="form-group">

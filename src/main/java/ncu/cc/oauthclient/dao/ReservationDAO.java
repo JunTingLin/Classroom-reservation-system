@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface ReservationDAO extends JpaRepository<Reservation,Integer> {
 
-    @Query(value = "SELECT * FROM reservation r where r.student_id = :student_id",nativeQuery = true)
-    List<Reservation> findAllByStudentId(@Param("student_id") String student_id );
+    @Query(value = "SELECT * FROM reservation r where r.student_id = :student_id \n" +
+            "AND CURDATE() <= r.date\n" +
+            "ORDER BY r.date ASC",nativeQuery = true)
+    List<Reservation> findAllByStudentIdwOrderByDate(@Param("student_id") String student_id );
 }
