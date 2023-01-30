@@ -53,6 +53,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-### secrete.properties ###
-src/resoureces/application.properties

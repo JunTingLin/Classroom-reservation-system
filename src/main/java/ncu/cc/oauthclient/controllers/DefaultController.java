@@ -1,6 +1,8 @@
 package ncu.cc.oauthclient.controllers;
 
 import ncu.cc.oauthclient.bean.Reservation;
+import ncu.cc.oauthclient.dao.ReservationDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -14,16 +16,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Controller
 public class DefaultController {
+    @Autowired
+    ReservationDAO reservationDAO;
+
     @RequestMapping("/")
     public String home() {
         return "home";
     }
 
     @RequestMapping("/form")
-    public String form(ModelMap modelMap) {
+    public String form(ModelMap modelMap,Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication instanceof OAuth2AuthenticationToken) {
@@ -34,7 +40,11 @@ public class DefaultController {
             });
             modelMap.addAttribute("p",token.getPrincipal().getAttributes());
 
+            List<Reservation> yourReservations = reservationDAO.findAllByStudentId((String)token.getPrincipal().getAttributes().get("identifier"));
+            model.addAttribute("yourReservations",yourReservations);
+
         }
+
 
         return "form";
     }
@@ -46,6 +56,7 @@ public class DefaultController {
 
     @PostMapping("/addReservation")
     public String addReservation(String classroom,String date,String start,String end) {
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         final var token = (OAuth2AuthenticationToken) authentication;
         Reservation reservation = new Reservation();
@@ -58,6 +69,8 @@ public class DefaultController {
         reservation.setEnd(LocalTime.parse(end));
 
         System.out.println(reservation);
+        reservationDAO.save(reservation);
+
 
         return "redirect:/form";
     }
