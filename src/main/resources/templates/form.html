@@ -39,40 +39,42 @@
 
         <h2>新增預約</h2>
 
-        <form th:object="${#httpServletRequest.remoteUser}">
-            
+        <form th:action="@{/addReservation}"  method="post" enctype="multipart/form-data">
+
             <div class="form-group">
                 <label for="inputStudentId">StudentId</label>
-                <input type="text" class="form-control" id="inputStudentId"  th:value="${p.get('identifier')}" disabled>
+                <input type="text" name="studentId" class="form-control" id="inputStudentId"  th:value="${p.get('identifier')}"  disabled>
             </div>
             <div class="form-group">
                 <label for="inputChineseName">ChineseName</label>
-                <input type="text" class="form-control" id="inputChineseName"  th:value="${p.get('chineseName')}" disabled>
+                <input type="text" name="chineseName" class="form-control" id="inputChineseName"  th:value="${p.get('chineseName')}" disabled>
             </div>
             <div class="form-group">
                 <label for="inputEmail">Email address</label>
-                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" th:value="${p.get('email')}" disabled>
+                <input type="email" name="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" th:value="${p.get('email')}" disabled>
                 <small id="emailHelp" class="form-text text-muted">此emal是您protal上登記的email，預約時間前半小時會寄email提醒您</small>
             </div>
-
-            <select class="form-select" aria-label="Default select example" required>
+            <div class="form-group">
                 <label>choose classroom</label>
-                <option value="S130">S130</option>
-                <option value="S231">S231</option>
-                <option value="S253">S253</option>
-            </select>
-            <div class="form-group">
-                <label for="date">Date</label>
-                <input type="date" id="date" name="date" required>
+                <select class="form-select" aria-label="Default select example" required>
+                    <option value="S130" name="classroom">S130</option>
+                    <option value="S231" name="classroom">S231</option>
+                    <option value="S253" name="classroom">S253</option>
+                </select>
             </div>
-            <div class="form-group">
-                <label for="start">Choose a time for your meeting start:</label>
-                <input type="time" id="start" name="start"  min="09:00" max="18:00" step="3600" required>
-            </div>
-            <div class="form-group">
-                <label for="end">Choose a time for your meeting end:</label>
-                <input type="time" id="end" name="end"  min="09:00" max="18:00" step="3600" required>
-            </div>
+
+<!--            <div class="form-group">-->
+<!--                <label for="date">Date</label>-->
+<!--                <input type="date" id="date" name="date" required>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="start">Choose a time for your meeting start:</label>-->
+<!--                <input type="time" id="start" name="start"  min="09:00" max="18:00" step="3600" required>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="end">Choose a time for your meeting end:</label>-->
+<!--                <input type="time" id="end" name="end"  min="09:00" max="18:00" step="3600" required>-->
+<!--            </div>-->
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 

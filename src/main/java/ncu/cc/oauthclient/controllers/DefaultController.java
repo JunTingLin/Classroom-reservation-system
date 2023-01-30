@@ -1,10 +1,13 @@
 package ncu.cc.oauthclient.controllers;
 
+import ncu.cc.oauthclient.bean.Reservation;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -15,7 +18,7 @@ public class DefaultController {
     }
 
     @RequestMapping("/form")
-    public String user(ModelMap modelMap) {
+    public String form(ModelMap modelMap) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication instanceof OAuth2AuthenticationToken) {
@@ -32,7 +35,14 @@ public class DefaultController {
     }
 
     @RequestMapping("/calendar")
-    public String about() {
+    public String calendar() {
         return "calendar";
+    }
+
+    @PostMapping("/addReservation")
+    public String addReservation(@ModelAttribute Reservation reservation) {
+        System.out.println(reservation);
+
+        return "redirect:/form";
     }
 }
