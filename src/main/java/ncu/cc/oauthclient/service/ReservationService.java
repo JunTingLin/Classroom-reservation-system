@@ -14,9 +14,9 @@ public class ReservationService {
     @Autowired
     ReservationDAO reservationDAO;
 
-    public Boolean isDateTimeValid(LocalDateTime checkTime){
+    public Boolean isDateTimeValid(LocalDateTime checkTime,String classroom){
 
-        List<Reservation> reservationList = reservationDAO.findAll();
+        List<Reservation> reservationList = reservationDAO.findAllByClassroom(classroom);
         for(Reservation r : reservationList){
             LocalDateTime startDateTime = r.getDate().atTime(r.getStart());
             LocalDateTime endDateTime = r.getDate().atTime(r.getEnd());

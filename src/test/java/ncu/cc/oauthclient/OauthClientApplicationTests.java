@@ -15,7 +15,12 @@ class OauthClientApplicationTests {
 	@Test
 	void testSelectReservation() {
 		List list = reservationDAO.findAllByStudentIdwOrderByDate("109403537");
-		list.forEach(System.out::print);
+		list.forEach(System.out::println);
+
+		List list2 = reservationDAO.findAllByClassroom("S130");
+		list2.forEach(System.out::println);
 	}
+
+
 
 }

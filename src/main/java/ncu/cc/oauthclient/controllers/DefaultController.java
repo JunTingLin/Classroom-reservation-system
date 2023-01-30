@@ -77,9 +77,11 @@ public class DefaultController {
         LocalDateTime endDateTime = reservation.getDate().atTime(reservation.getEnd());
         if(startDateTime.isAfter(endDateTime)){
             msg="新增失敗，開始時間不可晚於結束時間";
-        } else if(!reservationService.isDateTimeValid(startDateTime)) {
+        } else if (startDateTime.isBefore(LocalDateTime.now()) || endDateTime.isBefore(LocalDateTime.now())) {
+            msg="新增失敗，只能預約未來";
+        } else if(!reservationService.isDateTimeValid(startDateTime,reservation.getClassroom())) {
             msg="新增失敗，開始時間包含在別人的區間當中";
-        } else if (!reservationService.isDateTimeValid(endDateTime)) {
+        } else if (!reservationService.isDateTimeValid(endDateTime,reservation.getClassroom())) {
             msg="新增失敗，結束時間包含在別人的區間當中";
         } else {
             reservationDAO.save(reservation);
