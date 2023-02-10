@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class DefaultController {
@@ -54,8 +56,31 @@ public class DefaultController {
     }
 
     @RequestMapping("/calendar")
-    public String calendar() {
+    public String calendar(){
+        System.out.print(getDetail());
         return "calendar";
+    }
+
+    public Map<Object, Object> getDetail(){
+        String[] classList = new String[]{"S130", "S231", "S253"};
+        Map<Object, Object> re = new HashMap<>();
+
+        for (String classroom : classList){
+            List<Reservation> rList = reservationDAO.findAllByClassroom(classroom);
+            int i = 0;
+            for (Reservation l : rList){
+                Map<String, Object> data = new HashMap<>();
+                data.put("classroom", classroom);
+                data.put("chinese_name", l.getChineseName());
+                data.put("date", l.getDate());
+                data.put("start", l.getStart());
+                data.put("end", l.getEnd());
+                re.put(i, data);
+                i++;
+            }
+        }
+//        System.out.print(re);
+        return re;
     }
 
     @PostMapping("/addReservation")
