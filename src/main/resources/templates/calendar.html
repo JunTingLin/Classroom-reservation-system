@@ -8,21 +8,43 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
+
+            var text = (document.getElementById("detail").innerHTML).replace(/=/g, ':');
+            var jsoner = JSON.parse(text);
+
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                events: [
-                    { // this object will be "parsed" into an Event Object
-                        title: 'The Title', // a property!
-                        start: '2023-02-09', // a property!
-                        // startTime: '10:45:00',
-                        // endTime: '12:45:00',
-                        end: '2023-02-10' // a property! ** see important note below about 'end' **
-                    }
-                ],
-                    initialView: 'dayGridMonth'
+                eventTimeFormat: { // like '14:30:00'
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    meridiem: true,
+                    timeFormat: 'H(:mm)'
+                },
+                displayEventEnd: {
+                    month: false,
+                    basicWeek: true,
+                    "default": true
+                },
+                initialView: 'dayGridMonth',
+                slotLabelFormat:"HH:mm"
                 });
+
+            var len = Object.keys(jsoner).length;
+            for (var i=0; i<len; i++){
+                var obj = jsoner[i.toString()];
+                // console.log(Object.keys(obj).length);
+                var title = obj["chinese_name"] + obj['classroom'];
+                var startTime = obj['date'] + 'T' + obj['start'];
+                var endTime = obj['date'] + 'T' + obj['end'];
+                calendar.addEvent({
+                    title:  title,
+                    start:  startTime,
+                    end:  endTime,
+                    allDay: false
+                })
+            }
+
             calendar.render();
         });
-
     </script>
 </head>
 <body>
@@ -37,6 +59,8 @@
     </div>
 
 </div>
+
+<div id="detail" th:text="${detail}" style="display: none"/>
 
 <!-- /.container -->
 

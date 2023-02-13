@@ -56,12 +56,8 @@ public class DefaultController {
     }
 
     @RequestMapping("/calendar")
-    public String calendar(){
-        System.out.print(getDetail());
-        return "calendar";
-    }
+    public String calendar(Model model){
 
-    public Map<Object, Object> getDetail(){
         String[] classList = new String[]{"S130", "S231", "S253"};
         Map<Object, Object> re = new HashMap<>();
 
@@ -70,18 +66,42 @@ public class DefaultController {
             int i = 0;
             for (Reservation l : rList){
                 Map<String, Object> data = new HashMap<>();
-                data.put("classroom", classroom);
-                data.put("chinese_name", l.getChineseName());
-                data.put("date", l.getDate());
-                data.put("start", l.getStart());
-                data.put("end", l.getEnd());
-                re.put(i, data);
+                data.put('"' + "classroom" + '"', '"' + classroom + '"');
+                data.put('"' + "chinese_name" + '"', '"' + l.getChineseName() + '"');
+                data.put('"' + "date" + '"', '"' + l.getDate().toString() + '"');
+                data.put('"' + "start" + '"', '"' + l.getStart().toString() + '"');
+                data.put('"' + "end" + '"', '"' + l.getEnd().toString() + '"');
+                re.put('"' + Integer.toString(i) + '"', data);
                 i++;
             }
         }
+
+        model.addAttribute("detail", re);
 //        System.out.print(re);
-        return re;
+        return "calendar";
     }
+
+//    public Map<Object, Object> getDetail(){
+//        String[] classList = new String[]{"S130", "S231", "S253"};
+//        Map<Object, Object> re = new HashMap<>();
+//
+//        for (String classroom : classList){
+//            List<Reservation> rList = reservationDAO.findAllByClassroom(classroom);
+//            int i = 0;
+//            for (Reservation l : rList){
+//                Map<String, Object> data = new HashMap<>();
+//                data.put("classroom", classroom);
+//                data.put("chinese_name", l.getChineseName());
+//                data.put("date", l.getDate());
+//                data.put("start", l.getStart());
+//                data.put("end", l.getEnd());
+//                re.put(i, data);
+//                i++;
+//            }
+//        }
+//        System.out.print(re);
+//        return re;
+//    }
 
     @PostMapping("/addReservation")
     public String addReservation(String classroom,String date,String start,String end) {
