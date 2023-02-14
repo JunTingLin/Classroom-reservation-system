@@ -14,11 +14,14 @@ class OauthClientApplicationTests {
 	ReservationDAO reservationDAO;
 	@Test
 	void testSelectReservation() {
-		List list = reservationDAO.findAllByStudentIdwOrderByDate("109403537");
-		list.forEach(System.out::println);
+//		List list = reservationDAO.findAllByStudentIdwOrderByDate("109403537");
+//		list.forEach(System.out::println);
+//
+//		List list2 = reservationDAO.findAllByClassroom("S130");
+//		list2.forEach(System.out::println);
 
-		List list2 = reservationDAO.findAllByClassroom("S130");
-		list2.forEach(System.out::println);
+		List list3 = reservationDAO.findAllByBatchGroupByInfoDESC(true);
+		list3.forEach(System.out::println);
 	}
 
 

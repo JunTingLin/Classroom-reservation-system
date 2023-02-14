@@ -14,19 +14,15 @@
         <!--        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
         <h1>批量新增</h1>
         <h2>您目前的批量群組</h2>
-        <small>
-            <ol>
-                <li>此部分僅顯示今天(含)以後的預約，過往紀錄不顯示</li>
-                <li>日期(date)從最近的開始排序</li>
-            </ol>
-        </small>
+
         <table class="table">
             <thead>
             <tr>
                 <th scope="col">classroom</th>
-                <th scope="col">date</th>
-                <th scope="col">start</th>
-                <th scope="col">end</th>
+                <th scope="col">start_date</th>
+                <th scope="col">end_date</th>
+                <th scope="col">start_time</th>
+                <th scope="col">end_time</th>
                 <th scope="col">info</th>
                 <th scope="col">isBatch</th>
                 <th scope="col">operate</th>
@@ -34,15 +30,18 @@
             </thead>
             <tbody>
 
-            <tr th:each="yourReservation: ${yourReservations}">
-                <form th:action="@{/deleteReservation}"  method="post" enctype="multipart/form-data">
-                    <input name="id" th:value="${yourReservation.id}" hidden>
-                    <th scope="row" th:text="${yourReservation.classroom}" />
-                    <td th:text="${yourReservation.date}" />
-                    <td th:text="${yourReservation.start}" />
-                    <td th:text="${yourReservation.end}" />
-                    <td th:text="${yourReservation.info}" />
-                    <td th:text="${yourReservation.isBatch()}" />
+            <tr th:each="yourBatch: ${yourBatchs}">
+                <form th:action="@{/deleteBatch}"  method="post" enctype="multipart/form-data">
+                    <input name="id" th:value="${yourBatch.id}" hidden>
+                    <input name="info" th:value="${yourBatch.info}" hidden>
+                    <input name="isBatch" th:value="${yourBatch.isBatch()}" hidden>
+                    <th scope="row" th:text="${yourBatch.classroom}" />
+                    <td th:text="${yourBatch.date}" />
+                    <td th:text="${yourBatch.endDate}" />
+                    <td th:text="${yourBatch.start}" />
+                    <td th:text="${yourBatch.end}" />
+                    <td th:text="${yourBatch.info}" />
+                    <td th:text="${yourBatch.isBatch()}" />
                     <td><button type="submit" class="btn btn-danger" id="deleteButton">Delete</button></td>
                 </form>
             </tr>

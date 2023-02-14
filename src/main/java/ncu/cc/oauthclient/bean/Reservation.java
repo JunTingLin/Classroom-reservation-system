@@ -2,14 +2,11 @@ package ncu.cc.oauthclient.bean;
 
 import lombok.Data;
 import lombok.ToString;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 @Entity
 @Data
@@ -27,4 +24,7 @@ public class Reservation {
     private LocalTime end;
     private String info;
     private boolean isBatch;
+
+    @Transient
+    private Date endDate; //臨時屬性，用在批量新增頁面
 }

@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -154,8 +154,13 @@ public class DefaultController {
             });
             modelMap.addAttribute("p", token.getPrincipal().getAttributes());
 
-            List<Reservation> yourReservations = reservationDAO.findAllByStudentIdAAndBatchOrderByDate((String) token.getPrincipal().getAttributes().get("identifier"), true);
-            model.addAttribute("yourReservations", yourReservations);
+            List<Reservation> yourBatchs = reservationDAO.findAllByBatchGroupByInfoASC( true);
+            List<Date> yourBatchsDESC = reservationDAO.findAllByBatchGroupByInfoDESC( true);
+            for(int i=0;i< yourBatchs.size();i++){
+                yourBatchs.get(i).setEndDate(yourBatchsDESC.get(i));
+                //把groupby好的最後時間加入
+            }
+            model.addAttribute("yourBatchs", yourBatchs);
             model.addAttribute("msg", msg);
 
         }
@@ -198,6 +203,15 @@ public class DefaultController {
             }
 
         }
+
+        return "redirect:/batchForm";
+    }
+
+    @PostMapping("/deleteBatch")
+    public String deleteBatch( String info, String isBatch) {
+
+        System.out.println(info);
+        reservationDAO.deleteByInfoAndBatch(info,Boolean.parseBoolean(isBatch));
 
         return "redirect:/batchForm";
     }
