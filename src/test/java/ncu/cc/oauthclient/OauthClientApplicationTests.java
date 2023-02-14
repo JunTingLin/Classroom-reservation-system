@@ -20,7 +20,7 @@ class OauthClientApplicationTests {
 //		List list2 = reservationDAO.findAllByClassroom("S130");
 //		list2.forEach(System.out::println);
 
-		List list3 = reservationDAO.findAllByBatchGroupByInfoDESC(true);
+		List list3 = reservationDAO.findDateByBatchGroupByInfoDESC(true);
 		list3.forEach(System.out::println);
 	}
 

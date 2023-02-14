@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public interface ReservationDAO extends JpaRepository<Reservation,Integer> {
     @Query(value = "SELECT  Max(date) as date FROM reservation \n" +
             "WHERE is_batch = :is_batch\n" +
             "GROUP BY info" ,nativeQuery = true)
-    List<Date> findAllByBatchGroupByInfoDESC(@Param("is_batch") boolean is_batch);
+    List<Date> findDateByBatchGroupByInfoDESC(@Param("is_batch") boolean is_batch);
 
     @Query(value = "SELECT * FROM reservation r where r.classroom = :classroom", nativeQuery = true)
     List<Reservation> findAllByClassroom( @Param("classroom") String classroom);

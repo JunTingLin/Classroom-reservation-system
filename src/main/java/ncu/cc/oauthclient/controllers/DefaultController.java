@@ -155,9 +155,9 @@ public class DefaultController {
             modelMap.addAttribute("p", token.getPrincipal().getAttributes());
 
             List<Reservation> yourBatchs = reservationDAO.findAllByBatchGroupByInfoASC( true);
-            List<Date> yourBatchsDESC = reservationDAO.findAllByBatchGroupByInfoDESC( true);
+            List<Date> yourLastDateList = reservationDAO.findDateByBatchGroupByInfoDESC( true);
             for(int i=0;i< yourBatchs.size();i++){
-                yourBatchs.get(i).setEndDate(yourBatchsDESC.get(i));
+                yourBatchs.get(i).setEndDate(yourLastDateList.get(i));
                 //把groupby好的最後時間加入
             }
             model.addAttribute("yourBatchs", yourBatchs);
