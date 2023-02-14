@@ -33,8 +33,8 @@ public class DefaultController {
         return "home";
     }
 
-    @RequestMapping("/form")
-    public String form(ModelMap modelMap,Model model) {
+    @RequestMapping("/reservationForm")
+    public String reservationForm(ModelMap modelMap, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication instanceof OAuth2AuthenticationToken) {
@@ -52,7 +52,7 @@ public class DefaultController {
         }
 
 
-        return "form";
+        return "reservationForm";
     }
 
     @RequestMapping("/calendar")
@@ -133,7 +133,7 @@ public class DefaultController {
             msg="新增成功";
         }
 
-        return "redirect:/form";
+        return "redirect:/reservationForm";
     }
 
     @PostMapping("/deleteReservation")
@@ -142,7 +142,41 @@ public class DefaultController {
         System.out.println(id);
         reservationDAO.deleteById(id);
 
-        return "redirect:/form";
+        return "redirect:/reservationForm";
     }
+
+    @PostMapping("/addBatch")
+    public String addBatch(String classroom,String date,String start,String end) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        final var token = (OAuth2AuthenticationToken) authentication;
+        Reservation reservation = new Reservation();
+        reservation.setStudentId((String)token.getPrincipal().getAttributes().get("identifier"));
+        reservation.setChineseName((String) token.getPrincipal().getAttributes().get("chineseName"));
+        reservation.setEmail((String) token.getPrincipal().getAttributes().get("email"));
+        reservation.setClassroom(classroom);
+        reservation.setDate(LocalDate.parse(date));
+        reservation.setStart(LocalTime.parse(start));
+        reservation.setEnd(LocalTime.parse(end));
+
+        System.out.println(reservation);
+        LocalDateTime startDateTime = reservation.getDate().atTime(reservation.getStart());
+        LocalDateTime endDateTime = reservation.getDate().atTime(reservation.getEnd());
+        if(startDateTime.isAfter(endDateTime)){
+            msg="新增失敗，開始時間不可晚於結束時間";
+        } else if (startDateTime.isBefore(LocalDateTime.now()) || endDateTime.isBefore(LocalDateTime.now())) {
+            msg="新增失敗，只能預約未來";
+        } else if(!reservationService.isDateTimeValid(startDateTime,reservation.getClassroom())) {
+            msg="新增失敗，開始時間包含在別人的區間當中";
+        } else if (!reservationService.isDateTimeValid(endDateTime,reservation.getClassroom())) {
+            msg="新增失敗，結束時間包含在別人的區間當中";
+        } else {
+            reservationDAO.save(reservation);
+            msg="新增成功";
+        }
+
+        return "redirect:/reservationForm";
+    }
+
 
 }
