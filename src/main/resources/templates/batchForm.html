@@ -50,14 +50,14 @@
             </tbody>
         </table>
 
-        <h2>新增預約</h2>
+        <h2>批量新增</h2>
         <div class="alert alert-danger" role="alert" th:if="${msg!=null && !msg.equals('新增成功')}">
             [[${msg}]]
         </div>
         <div class="alert alert-success" role="alert" th:if="${msg!=null && msg.equals('新增成功')}">
             [[${msg}]]
         </div>
-        <form th:action="@{/addReservation}"  method="post" enctype="multipart/form-data">
+        <form th:action="@{/addBatch}"  method="post" enctype="multipart/form-data">
 
             <div class="form-group">
                 <label for="inputStudentId">StudentId</label>
@@ -82,8 +82,12 @@
             </div>
 
             <div class="form-group">
-                <label for="date">Date</label>
-                <input type="date" id="date" name="date" required>
+                <label for="startDate">Start Date</label>
+                <input type="date" id="startDate" name="startDate" required>
+            </div>
+            <div class="form-group">
+                <label for="weeks">持續幾週 weeks</label>
+                <input type="number" name="weeks" class="form-control" id="weeks"  >
             </div>
             <div class="form-group">
                 <label for="start">Choose a time for your meeting start:</label>
