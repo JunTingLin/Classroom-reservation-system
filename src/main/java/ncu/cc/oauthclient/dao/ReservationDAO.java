@@ -14,6 +14,13 @@ public interface ReservationDAO extends JpaRepository<Reservation,Integer> {
             "ORDER BY r.date ASC",nativeQuery = true)
     List<Reservation> findAllByStudentIdwOrderByDate(@Param("student_id") String student_id );
 
+    @Query(value = "SELECT * FROM reservation r where r.student_id = :student_id \n" +
+            "AND CURDATE() <= r.date\n" +
+            "AND r.is_batch = :is_batch\n" +
+            "ORDER BY r.date ASC",nativeQuery = true)
+    List<Reservation> findAllByStudentIdAAndBatchOrderByDate(@Param("student_id") String student_id ,@Param("is_batch") boolean is_batch);
+
+
     @Query(value = "SELECT * FROM reservation r where r.classroom = :classroom", nativeQuery = true)
     List<Reservation> findAllByClassroom( @Param("classroom") String classroom);
 }

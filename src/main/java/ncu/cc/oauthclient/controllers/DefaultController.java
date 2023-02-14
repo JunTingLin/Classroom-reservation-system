@@ -45,7 +45,7 @@ public class DefaultController {
             });
             modelMap.addAttribute("p",token.getPrincipal().getAttributes());
 
-            List<Reservation> yourReservations = reservationDAO.findAllByStudentIdwOrderByDate((String)token.getPrincipal().getAttributes().get("identifier"));
+            List<Reservation> yourReservations = reservationDAO.findAllByStudentIdAAndBatchOrderByDate((String)token.getPrincipal().getAttributes().get("identifier"),false);
             model.addAttribute("yourReservations",yourReservations);
             model.addAttribute("msg",msg);
 
@@ -104,7 +104,7 @@ public class DefaultController {
 //    }
 
     @PostMapping("/addReservation")
-    public String addReservation(String classroom,String date,String start,String end) {
+    public String addReservation(String classroom,String date,String start,String end,String info) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         final var token = (OAuth2AuthenticationToken) authentication;
@@ -116,6 +116,8 @@ public class DefaultController {
         reservation.setDate(LocalDate.parse(date));
         reservation.setStart(LocalTime.parse(start));
         reservation.setEnd(LocalTime.parse(end));
+        reservation.setInfo(info);
+        reservation.setBatch(false);
 
         System.out.println(reservation);
         LocalDateTime startDateTime = reservation.getDate().atTime(reservation.getStart());

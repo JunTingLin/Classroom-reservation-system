@@ -11,9 +11,9 @@
 <div class="container">
 
     <div class="starter-template">
-<!--        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
-        <h1>預約 (ncu portal)</h1>
-        <h2>您目前已預約</h2>
+        <!--        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
+        <h1>批量新增</h1>
+        <h2>您目前的批量群組</h2>
         <small>
             <ol>
                 <li>此部分僅顯示今天(含)以後的預約，過往紀錄不顯示</li>
@@ -27,6 +27,8 @@
                 <th scope="col">date</th>
                 <th scope="col">start</th>
                 <th scope="col">end</th>
+                <th scope="col">info</th>
+                <th scope="col">isBatch</th>
                 <th scope="col">operate</th>
             </tr>
             </thead>
@@ -39,6 +41,8 @@
                     <td th:text="${yourReservation.date}" />
                     <td th:text="${yourReservation.start}" />
                     <td th:text="${yourReservation.end}" />
+                    <td th:text="${yourReservation.info}" />
+                    <td th:text="${yourReservation.isBatch()}" />
                     <td><button type="submit" class="btn btn-danger" id="deleteButton">Delete</button></td>
                 </form>
             </tr>
@@ -89,6 +93,11 @@
                 <label for="end">Choose a time for your meeting end:</label>
                 <input type="time" id="end" name="end"  min="09:00" max="18:00" step="3600" required>
             </div>
+            <div class="form-group">
+                <label for="info">info</label>
+                <input type="text" name="info" class="form-control" id="info"  >
+            </div>
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 

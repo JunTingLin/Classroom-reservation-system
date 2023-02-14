@@ -25,4 +25,6 @@ public class Reservation {
     private LocalDate date;
     private LocalTime start;
     private LocalTime end;
+    private String info;
+    private boolean isBatch;
 }
