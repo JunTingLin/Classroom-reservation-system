@@ -3,6 +3,10 @@
 <head>
     <div th:replace="fragments/header :: header-css"/>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.0.3/index.global.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.0.3/main.min.css" rel="stylesheet">
     <script>
 
@@ -13,6 +17,16 @@
             var jsoner = JSON.parse(text);
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
+
+                eventDidMount: function(info) {
+                    $(info.el).tooltip({
+                        title: info.event.extendedProps.description,
+                        placement: 'top',
+                        trigger: 'hover',
+                        container: 'body'
+                    });
+                },
+
                 eventTimeFormat: { // like '14:30:00'
                     hour: '2-digit',
                     minute: '2-digit',
@@ -35,10 +49,12 @@
                 var title = obj["chinese_name"] + obj['classroom'];
                 var startTime = obj['date'] + 'T' + obj['start'];
                 var endTime = obj['date'] + 'T' + obj['end'];
+                var description = title + '\n' + obj['start'] + '~' + obj['end'];
                 calendar.addEvent({
                     title:  title,
                     start:  startTime,
                     end:  endTime,
+                    description: description,
                     allDay: false
                 })
             }
@@ -46,6 +62,7 @@
             calendar.render();
         });
     </script>
+
 </head>
 <body>
 
