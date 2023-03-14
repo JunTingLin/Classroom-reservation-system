@@ -1,5 +1,28 @@
 # Classroom-reservation-system
 
+# 部屬小筆記
+maven打包fat jar指令，且跳過test
+
+`mvn package -Dmaven.test.skip`
+
+idea GUI
+
+![image](https://user-images.githubusercontent.com/92431095/224988836-4f3fda5f-a8ee-4fbb-87e9-42c945606828.png)
+
+運行jar檔指令
+
+`java -jar <jar-file-name>.jar`
+
+背景運行，使用nohup(no hang up不挂起)
+
+`nohup java -jar /var/services/homes/geo251/oauth-client-1.0.0.jar &`
+
+參考資料:[Linux nohup 命令](https://www.runoob.com/linux/linux-comm-nohup.html)
+![image](https://user-images.githubusercontent.com/92431095/224990307-129c1842-b89d-46b5-b21f-4d0bbf2fb6c1.png)
+
+
+
+
 # 渲染圖
 1. HOME
 ![image](https://user-images.githubusercontent.com/92431095/215586277-a9093474-3a9e-484b-9c93-d16ab90b5ae6.png)
