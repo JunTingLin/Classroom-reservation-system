@@ -1,5 +1,8 @@
 # Classroom-reservation-system
 
+## The website now is runing on Nas server
+http://140.115.123.11:8080/
+
 # 部屬小筆記
 maven打包fat jar指令，且跳過test
 
