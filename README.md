@@ -29,7 +29,7 @@ idea GUI
 
 
 2. 日曆
-![image](https://user-images.githubusercontent.com/92431095/215585831-6a4e974d-8311-4c0f-953e-77856083dd00.png)
+![image](https://user-images.githubusercontent.com/92431095/224990696-4aa07e63-964e-4af9-9df7-5b582a41218e.png)
 
 
 3. 查看刪除個人預約、表單提交(需透過中大單一登入)
