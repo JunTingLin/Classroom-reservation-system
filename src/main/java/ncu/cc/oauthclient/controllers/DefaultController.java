@@ -32,6 +32,11 @@ public class DefaultController {
     ReservationService reservationService;
 
     @RequestMapping("/")
+    public String index() {
+        return "index";
+    }
+
+    @RequestMapping("/home")
     public String home() {
         return "home";
     }
