@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>中央大學應地所-教室預約系統</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* 将 h2 定位到页面的右上角 */
         h2 {
@@ -12,6 +13,7 @@
             right: 0;
             margin: 20px;
         }
+
         /* 设置页脚样式 */
         footer {
             position: fixed;
@@ -27,14 +29,20 @@
 <body>
 <h2><a th:href="@{/home}">教室預約系統v2(開發中~~請勿使用DON'T USE)</a></h2>
 <h3>Apply for classroom reservation</h3>
-<p>( S130, S253 上課時間的預約無效, 請先查看<a href="http://www.geo.ncu.edu.tw/wordpress/%e8%aa%b2%e7%a8%8b%e5%85%a7%e5%ae%b9/">學期課表</a> )</p>
+<p>( S130, S253 上課時間的預約無效, 請先查看<a
+        href="http://www.geo.ncu.edu.tw/wordpress/%e8%aa%b2%e7%a8%8b%e5%85%a7%e5%ae%b9/">學期課表</a> )</p>
 <iframe src="https://ap8.ragic.com/ncugeo/report/display?reportwv&id=5" width="100%" height="1000"></iframe>
 
 <h3>Check the current vacancy of the classroom</h3>
 <iframe src="https://ap8.ragic.com/ncugeo/report/display?reportwv&id=8" width="100%" height="1300"></iframe>
 
 <footer>
-    <p>Copyright © GEO All Rights Reserved.2023</p>
+    <p>Copyright © GEO All Rights Reserved.2023
+        <a href="https://github.com/JunTingLin/Classroom-reservation-system" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-github"></i>
+        </a>
+    </p>
+
 </footer>
 </body>
 </html>
