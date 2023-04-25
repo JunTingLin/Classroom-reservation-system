@@ -23,6 +23,11 @@ idea GUI
 參考資料:[Linux nohup 命令](https://www.runoob.com/linux/linux-comm-nohup.html)
 ![image](https://user-images.githubusercontent.com/92431095/224990307-129c1842-b89d-46b5-b21f-4d0bbf2fb6c1.png)
 
+查找process id
+
+`ps aux | grep oauth-client-1.0.0.jar`
+
+`kill <PID>`
 
 
 

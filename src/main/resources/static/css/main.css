@@ -314,3 +314,16 @@ pre {
 		text-align: center
 	}
 }
+
+.admin-box {
+	border: 1px solid #000;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+.admin-label {
+	font-weight: bold;
+}
+.spacer {
+	height: 50px; /* 設定間距的高度 */
+}
