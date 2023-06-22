@@ -3,7 +3,7 @@
 ## The website now is runing on Nas server
 http://140.115.123.11:8080/
 
-# 部屬小筆記
+# 部署小筆記
 ~~maven打包fat jar指令，且跳過test~~
 
 `mvn package -Dmaven.test.skip`
@@ -35,14 +35,19 @@ idea GUI
 
 # 渲染圖
 1. HOME
-![image](https://user-images.githubusercontent.com/92431095/215586277-a9093474-3a9e-484b-9c93-d16ab90b5ae6.png)
+<img alt="image" src="https://github.com/JunTingLin/Classroom-reservation-system/assets/92431095/af467098-f0e9-48e8-9d50-c730b2b3e197">
 
 
 2. 日曆
 ![image](https://user-images.githubusercontent.com/92431095/224990696-4aa07e63-964e-4af9-9df7-5b582a41218e.png)
 
 
-3. 查看刪除個人預約、表單提交(需透過中大單一登入)
+3. 新增、刪除個人預約、表單提交(需透過中大單一登入)
 ![image](https://user-images.githubusercontent.com/92431095/215586461-940f0f92-212c-4a04-a438-e3113284ffbb.png)
+
+4. 新增、刪除批量預約(需透過中大單一登入)
+<img width="" alt="image" src="https://github.com/JunTingLin/Classroom-reservation-system/assets/92431095/6f5d800a-6b5f-4f33-806e-63ffe5a0be40">
+
+
 
 
