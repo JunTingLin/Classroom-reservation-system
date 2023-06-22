@@ -48,6 +48,10 @@ idea GUI
 4. 新增、刪除批量預約(需透過中大單一登入)
 <img width="" alt="image" src="https://github.com/JunTingLin/Classroom-reservation-system/assets/92431095/6f5d800a-6b5f-4f33-806e-63ffe5a0be40">
 
+5. 中大protal單一登入
+![image](https://github.com/JunTingLin/Classroom-reservation-system/assets/92431095/935834eb-fe48-482f-ae45-d01d8c5ce92b)
+
+
 
 
 
