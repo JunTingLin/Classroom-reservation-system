@@ -4,7 +4,7 @@
 http://140.115.123.11:8080/
 
 # 部屬小筆記
-maven打包fat jar指令，且跳過test
+~~maven打包fat jar指令，且跳過test~~
 
 `mvn package -Dmaven.test.skip`
 
@@ -12,9 +12,11 @@ idea GUI
 
 ![image](https://user-images.githubusercontent.com/92431095/224988836-4f3fda5f-a8ee-4fbb-87e9-42c945606828.png)
 
-運行jar檔指令
+配置文件已分開，現已經不需要，直接按下打包(package)即可
 
-`java -jar <jar-file-name>.jar`
+運行jar檔指令，並且指定配置文件
+
+`java -jar <jar-file-name>.jar --spring.profiles.active=prod`
 
 背景運行，使用nohup(no hang up不挂起)
 
