@@ -20,7 +20,9 @@ idea GUI
 
 背景運行，使用nohup(no hang up不挂起)
 
-`nohup java -jar /var/services/homes/geo251/oauth-client-1.0.0.jar &`
+`nohup java -jar /var/services/homes/geo251/oauth-client-1.0.0.jar --spring.profiles.active=prod &`
+
+`nohup java -jar /var/services/homes/geoad/oauth-client-1.0.0.jar --spring.profiles.active=prod &`
 
 參考資料:[Linux nohup 命令](https://www.runoob.com/linux/linux-comm-nohup.html)
 ![image](https://user-images.githubusercontent.com/92431095/224990307-129c1842-b89d-46b5-b21f-4d0bbf2fb6c1.png)
