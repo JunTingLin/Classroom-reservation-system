@@ -1,5 +1,7 @@
 # Classroom-reservation-system
 
+這個專案是為中央大學應用地質研究所開發的教室預約系統。考慮到以前使用 Google 表單和日曆進行預約的方式有點混亂難以管理，且缺乏身份驗證，任何人都可以進行預約。因此，本次專案使用 Spring Boot 和 Nas 上的 MariaDB 資料庫開發了一個簡單的預約系統。系統採用學校計中帳號的 Portal 單一登入認證機制，僅允許在學學生進行單一預約，而批量預約（例如課表）僅限指定的管理員帳號使用。
+
 ## The website now is runing on Nas server
 http://140.115.123.11:8080/
 
